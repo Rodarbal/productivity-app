@@ -13,11 +13,15 @@ class TimerRingView @JvmOverloads constructor(
     defStyle: Int = 0
 ) : View(context, attrs, defStyle) {
 
-    var durationMillis: Long = 10000L // default 10 seconds
-    var isRunning: Boolean = false
+    var durationMillis: Long = 100000L // default 10 seconds
+    var isRunning: Boolean = true
         set(value) {
             field = value
-            if (value) startTimer() else stopTimer()
+            if (value) {
+                startTimer()
+            } else {
+                stopTimer()
+            }
         }
 
     private var remainingTime: Long = durationMillis
