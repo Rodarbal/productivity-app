@@ -3,6 +3,7 @@ package com.example.productivityapp
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import android.widget.Button
+import android.widget.ImageButton
 
 
 class MainActivity : AppCompatActivity() {
@@ -22,10 +23,11 @@ class MainActivity : AppCompatActivity() {
         // Start the timer
         timerRing.isRunning = true
 
-        val pauseButton = findViewById<Button>(R.id.pauseButton)
+        val pauseButton = findViewById<ImageButton>(R.id.pauseButton)
         pauseButton.setOnClickListener {
             timerRing.isRunning = !timerRing.isRunning
-            pauseButton.text = if (timerRing.isRunning) "Pause" else "Resume"
+            val iconRes = if (timerRing.isRunning) R.drawable.ic_pause else R.drawable.ic_play
+            pauseButton.setImageResource(iconRes)
         }
 
         // OPTIONAL: Stop it later

@@ -16,15 +16,16 @@
         android:orientation="horizontal"
         android:gravity="center"
         android:layout_gravity="center"
-        android:layout_marginTop="16dp">
+        android:layout_marginTop="50dp">
 
         <ImageButton
             android:id="@+id/pauseButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="100dp"
+            android:layout_height="120dp"
             android:src="@drawable/ic_pause"
-            android:background="?attr/selectableItemBackgroundBorderless"
+            android:background="@android:color/transparent"
             android:contentDescription="Pause Button"
-            android:padding="8dp" />
+            android:scaleType="fitCenter"
+            android:padding="0dp" />
     </LinearLayout>
 </FrameLayout>
