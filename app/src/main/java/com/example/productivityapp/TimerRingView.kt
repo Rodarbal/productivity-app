@@ -41,6 +41,13 @@ class TimerRingView @JvmOverloads constructor(
         strokeCap = Paint.Cap.ROUND
     }
 
+    private val textPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
+        color = Color.BLACK
+        textSize = 150f
+        textAlign = Paint.Align.CENTER
+        typeface = Typeface.DEFAULT_BOLD
+    }
+
     private val updateInterval: Long = 16L // ~60fps
     private val updateRunnable = object : Runnable {
         override fun run() {
@@ -75,6 +82,14 @@ class TimerRingView @JvmOverloads constructor(
 
         // Draw the progress arc
         canvas.drawArc(rect, -90f, -angle, false, progressPaint)
+
+        val centerX = width / 2f
+        val centerY = height / 2f
+        val secondsLeft = (remainingTime / 1000).toInt()
+        val minutes = secondsLeft / 60
+        val seconds = secondsLeft % 60
+        val timeText = String.format("%02d:%02d", minutes, seconds)
+        canvas.drawText(timeText, centerX, centerY, textPaint)
     }
 
     fun resetTimer() {

@@ -30,6 +30,14 @@ class MainActivity : AppCompatActivity() {
             pauseButton.setImageResource(iconRes)
         }
 
+        val timerRingView = findViewById<TimerRingView>(R.id.timerRing)
+        val resetButton = findViewById<Button>(R.id.resetButton)
+        resetButton.setOnClickListener {
+            val wasRunning = timerRingView.isRunning
+            timerRingView.resetTimer()
+            timerRingView.isRunning = wasRunning
+        }
+
         // OPTIONAL: Stop it later
         // timerRing.isRunning = false
 
