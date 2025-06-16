@@ -13,7 +13,7 @@ class TimerRingView @JvmOverloads constructor(
     defStyle: Int = 0
 ) : View(context, attrs, defStyle) {
 
-    var durationMillis: Long = 100000L // default 10 seconds
+    var durationMillis: Long = 10000L // default 10 seconds
     var isRunning: Boolean = true
         set(value) {
             field = value
@@ -29,7 +29,7 @@ class TimerRingView @JvmOverloads constructor(
     private var angle: Float = 0f
 
     private val ringPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
-        color = Color.LTGRAY
+        color = Color.parseColor("#ccccff") //c7dbff or ccccff
         style = Paint.Style.STROKE
         strokeWidth = 30f
     }

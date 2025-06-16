@@ -18,7 +18,7 @@ class MainActivity : AppCompatActivity() {
         timerRing = findViewById(R.id.timerRing)
 
         // Set how long the timer should run (e.g. 10 seconds = 10,000 milliseconds)
-        timerRing.durationMillis = 100000L // 10 seconds
+        timerRing.durationMillis = 10000L // 10 seconds
 
         // Start the timer
         timerRing.isRunning = true
@@ -33,9 +33,12 @@ class MainActivity : AppCompatActivity() {
         val timerRingView = findViewById<TimerRingView>(R.id.timerRing)
         val resetButton = findViewById<Button>(R.id.resetButton)
         resetButton.setOnClickListener {
-            val wasRunning = timerRingView.isRunning
+            // Always stop the timer and reset it
+            timerRingView.isRunning = false
             timerRingView.resetTimer()
-            timerRingView.isRunning = wasRunning
+
+            // Update the pause button to show play icon
+            pauseButton.setImageResource(R.drawable.ic_play)
         }
 
         // OPTIONAL: Stop it later
