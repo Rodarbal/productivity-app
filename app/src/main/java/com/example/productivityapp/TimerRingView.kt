@@ -43,9 +43,9 @@ class TimerRingView @JvmOverloads constructor(
 
     private val textPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
         color = Color.BLACK
-        textSize = 150f
+        textSize = 200f
         textAlign = Paint.Align.CENTER
-        typeface = Typeface.DEFAULT_BOLD
+        typeface = Typeface.create(Typeface.DEFAULT, 500, false) // 500 = Medium weight
     }
 
     private val updateInterval: Long = 16L // ~60fps
