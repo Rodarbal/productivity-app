@@ -27,18 +27,34 @@
             android:contentDescription="Pause Button"
             android:scaleType="fitCenter"
             android:padding="0dp" />
+<!--        <Button-->
+<!--            android:id="@+id/resetButton"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="Reset Timer"-->
+<!--            android:background="@drawable/button_reset_background"-->
+<!--            android:drawableStart="@drawable/ic_timer"-->
+<!--            android:drawableTint="@android:color/darker_gray"-->
+
+<!--            android:drawablePadding="8dp"-->
+<!--            android:paddingStart="16dp"-->
+<!--            android:paddingEnd="16dp"-->
+<!--            android:textColor="@android:color/black"-->
+<!--            android:stateListAnimator="@null"-->
+<!--            android:textAllCaps="false" />-->
         <Button
             android:id="@+id/resetButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Reset Timer"
-            android:background="@drawable/button_reset_background"
             android:drawableStart="@drawable/ic_timer"
+            android:drawableTint="#0000FF"
             android:drawablePadding="8dp"
             android:paddingStart="16dp"
             android:paddingEnd="16dp"
-            android:textColor="@android:color/black"
-            android:stateListAnimator="@null"
-            android:textAllCaps="false" />
+            android:background="@drawable/button_reset_background"
+            android:textColor="#0000FF"
+            android:textAllCaps="false"
+            android:stateListAnimator="@null" />
     </LinearLayout>
 </FrameLayout>
