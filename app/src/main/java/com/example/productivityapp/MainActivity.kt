@@ -1,9 +1,12 @@
 package com.example.productivityapp
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import android.widget.Button
 import android.widget.ImageButton
+import android.widget.ImageView
+import com.example.productivityapp.ui.theme.LevelsActivity
 
 
 class MainActivity : AppCompatActivity() {
@@ -39,6 +42,12 @@ class MainActivity : AppCompatActivity() {
 
             // Update the pause button to show play icon
             pauseButton.setImageResource(R.drawable.ic_play)
+        }
+
+        val levelButton = findViewById<ImageView?>(R.id.levelButton)
+        levelButton?.setOnClickListener {
+            val intent = Intent(this, LevelsActivity::class.java)
+            startActivity(intent)
         }
 
         // OPTIONAL: Stop it later

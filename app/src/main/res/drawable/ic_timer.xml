@@ -5,8 +5,9 @@
     android:viewportHeight="960">
 
   <!-- Blue outer timer body with transparent center rectangle cut out -->
+  <!--"#0000FF"-->
   <path
-      android:fillColor="#0000FF"
+     android:fillColor="@android:color/white"
       android:fillType="evenOdd"
       android:pathData="
             M352.59,120v-87.41h254.82L607.41,120L352.59,120Z

@@ -1,49 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:gravity="center">
 
-    <com.example.productivityapp.TimerRingView
-        android:id="@+id/timerRing"
-        android:layout_width="325dp"
-        android:layout_height="350dp"
-        android:layout_marginTop="100dp"
-        android:layout_gravity="center_horizontal" />
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:gravity="center"
-        android:layout_gravity="center"
-        android:layout_marginTop="60dp">
-
-        <ImageButton
-            android:id="@+id/pauseButton"
-            android:layout_width="100dp"
-            android:layout_height="120dp"
-            android:src="@drawable/ic_pause"
-            android:background="@android:color/transparent"
-            android:contentDescription="Pause Button"
-            android:scaleType="fitCenter"
-            android:padding="0dp" />
-
-        <Button
-            android:id="@+id/resetButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Reset Timer"
-            android:drawableStart="@drawable/ic_timer"
-            android:drawableTint="#0000FF"
-            android:drawablePadding="8dp"
-            android:paddingStart="16dp"
-            android:paddingEnd="16dp"
-            android:background="@drawable/button_reset_background"
-            android:textColor="#0000FF"
-            android:textAllCaps="false"
-            android:stateListAnimator="@null" />
-    </LinearLayout>
     <LinearLayout
         android:id="@+id/navigationBar"
         android:layout_width="match_parent"
@@ -60,13 +21,15 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:gravity="center">
+
             <ImageView
                 android:id="@+id/levelButton"
                 android:layout_width="32dp"
                 android:layout_height="32dp"
                 android:src="@drawable/ic_map"
-                app:tint="#000000"
+                app:tint = "#0000FF"
                 app:tintMode="src_in"/>
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -81,11 +44,12 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:gravity="center">
+
             <ImageView
                 android:layout_width="32dp"
                 android:layout_height="32dp"
                 android:src="@drawable/ic_timer"
-                app:tint = "#0000FF"
+                app:tint="#000000"
                 app:tintMode="src_in"/>
             <TextView
                 android:layout_width="wrap_content"
@@ -113,4 +77,5 @@
                 android:textSize="12sp" />
         </LinearLayout>
     </LinearLayout>
+
 </FrameLayout>
