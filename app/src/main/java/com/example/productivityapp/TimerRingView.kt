@@ -56,11 +56,18 @@ class TimerRingView @JvmOverloads constructor(
             invalidate()
             if (remainingTime > 0 && isRunning) {
                 postDelayed(this, updateInterval)
+            } else if (remainingTime <= 0 && TimerState.completions < 5) {
+                TimerState.completions++
+                invalidate()
             }
         }
     }
 
     private fun startTimer() {
+        if (remainingTime <= 0) {
+            isRunning = false
+            return
+        }
         startTime = System.currentTimeMillis() - (durationMillis - remainingTime)
         removeCallbacks(updateRunnable)
         post(updateRunnable)
