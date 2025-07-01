@@ -48,6 +48,8 @@ class MainActivity : AppCompatActivity() {
         levelButton?.setOnClickListener {
             val intent = Intent(this, LevelsActivity::class.java)
             startActivity(intent)
+            overridePendingTransition(0, 0)
+            finish()
         }
 
         // OPTIONAL: Stop it later
