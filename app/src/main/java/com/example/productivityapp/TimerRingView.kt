@@ -1,4 +1,5 @@
 package com.example.productivityapp
+import com.example.productivityapp.TimerState
 
 import android.content.Context
 import android.graphics.*
@@ -69,6 +70,31 @@ class TimerRingView @JvmOverloads constructor(
 
     private fun stopTimer() {
         removeCallbacks(updateRunnable)
+        TimerState.remainingTime = remainingTime
+        TimerState.isRunning = isRunning
+        TimerState.lastStartTime = startTime
+    }
+    fun initFromState() {
+        durationMillis = TimerState.durationMillis
+        remainingTime = TimerState.remainingTime
+
+        if (TimerState.isRunning) {
+            val elapsed = System.currentTimeMillis() - TimerState.lastStartTime
+            remainingTime = (TimerState.remainingTime - elapsed).coerceAtLeast(0)
+        }
+
+        isRunning = TimerState.isRunning
+        angle = 360f * remainingTime.toFloat() / durationMillis
+        invalidate()
+
+        if (isRunning) {
+            startTimer()
+        }
+    }
+
+    override fun onAttachedToWindow() {
+        super.onAttachedToWindow()
+        initFromState()
     }
 
     override fun onDraw(canvas: Canvas) {
@@ -96,6 +122,9 @@ class TimerRingView @JvmOverloads constructor(
         stopTimer()
         remainingTime = durationMillis
         angle = 360f
+        TimerState.remainingTime = remainingTime
+        TimerState.isRunning = false
+        TimerState.lastStartTime = 0L
         invalidate()
     }
 }
