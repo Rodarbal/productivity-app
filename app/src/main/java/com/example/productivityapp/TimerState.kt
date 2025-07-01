@@ -5,4 +5,5 @@ object TimerState {
     var remainingTime: Long = 10000L
     var isRunning: Boolean = false
     var lastStartTime: Long = 0L
+    var completions: Int = 0
 }

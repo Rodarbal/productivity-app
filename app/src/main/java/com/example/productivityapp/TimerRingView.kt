@@ -1,11 +1,9 @@
 package com.example.productivityapp
-import com.example.productivityapp.TimerState
 
 import android.content.Context
 import android.graphics.*
 import android.util.AttributeSet
 import android.view.View
-import androidx.core.content.ContextCompat
 import kotlin.math.min
 
 class TimerRingView @JvmOverloads constructor(
@@ -116,6 +114,45 @@ class TimerRingView @JvmOverloads constructor(
         val seconds = secondsLeft % 60
         val timeText = String.format("%02d:%02d", minutes, seconds)
         canvas.drawText(timeText, centerX, centerY, textPaint)
+
+        drawProgressCircles(canvas, centerX, centerY)
+    }
+
+    private fun drawProgressCircles(canvas: Canvas, centerX: Float, centerY: Float) {
+        val circleRadius = 18f
+        val spacing = 24f
+        val totalWidth = (circleRadius * 2 * 5) + (spacing * 4)
+        val startX = centerX - (totalWidth / 2) + 20f
+        val circleY = centerY + 70f
+
+        val strokePaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
+            style = Paint.Style.STROKE
+            strokeWidth = 4f
+            color = Color.parseColor("#0000FF")
+        }
+
+        val fillPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
+            style = Paint.Style.FILL
+            color = Color.parseColor("#0000FF")
+        }
+
+        val hollowPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
+            style = Paint.Style.FILL
+            color = Color.WHITE
+        }
+
+        // Draw all hollow circles
+        for (i in 0 until 5) {
+            val cx = startX + i * (circleRadius * 2 + spacing)
+            canvas.drawCircle(cx, circleY, circleRadius, hollowPaint)
+            canvas.drawCircle(cx, circleY, circleRadius, strokePaint)
+        }
+
+        // Fill in first 5 (temporary placeholder)
+        for (i in 0 until TimerState.completions) {
+            val cx = startX + i * (circleRadius * 2 + spacing)
+            canvas.drawCircle(cx, circleY, circleRadius, fillPaint)
+        }
     }
 
     fun resetTimer() {
