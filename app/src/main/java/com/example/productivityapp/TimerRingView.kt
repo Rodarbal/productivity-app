@@ -149,7 +149,7 @@ class TimerRingView @JvmOverloads constructor(
             textAlign = Paint.Align.CENTER
             typeface = Typeface.create(Typeface.DEFAULT, Typeface.NORMAL)
         }
-        canvas.drawText("Level 1", centerX, centerY - 270f, levelPaint)
+        canvas.drawText("Level 1", centerX, centerY - 230f, levelPaint)
 
         // Second line: "Beginner Mind"
         val titlePaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
@@ -158,10 +158,10 @@ class TimerRingView @JvmOverloads constructor(
             textAlign = Paint.Align.CENTER
             typeface = Typeface.create(Typeface.DEFAULT, Typeface.BOLD)
         }
-        canvas.drawText("Beginner Mind", centerX, centerY - 200f, titlePaint)
+        canvas.drawText("Beginner Mind", centerX, centerY - 160f, titlePaint)
 
         // Third line: timer text (already in place)
-        canvas.drawText(timeText, centerX, centerY, textPaint)
+        canvas.drawText(timeText, centerX, centerY + 20f, textPaint)
 
         drawProgressCircles(canvas, centerX, centerY, completedCount)
     }
@@ -171,7 +171,7 @@ class TimerRingView @JvmOverloads constructor(
         val spacing = 24f
         val totalWidth = (circleRadius * 2 * 5) + (spacing * 4)
         val startX = centerX - (totalWidth / 2) + 20f
-        val circleY = centerY + 70f
+        val circleY = centerY + 120f
 
         val strokePaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
             style = Paint.Style.STROKE

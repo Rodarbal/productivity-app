@@ -1,24 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:gravity="center">
+    android:orientation="vertical"
+    android:paddingTop="20dp"
+    android:background="@android:color/white">
 
+    <!-- Spacer to push content down -->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="150dp" />
+
+    <!-- Timer ring centered -->
     <com.example.productivityapp.TimerRingView
         android:id="@+id/timerRing"
         android:layout_width="325dp"
         android:layout_height="350dp"
-        android:layout_marginTop="100dp"
         android:layout_gravity="center_horizontal" />
 
+    <!-- Buttons container -->
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:gravity="center"
-        android:layout_gravity="center"
-        android:layout_marginTop="60dp">
+        android:layout_marginTop="0dp">
 
         <ImageButton
             android:id="@+id/pauseButton"
@@ -43,13 +50,21 @@
             android:background="@drawable/button_reset_background"
             android:textColor="#0000FF"
             android:textAllCaps="false"
-            android:stateListAnimator="@null" />
+            android:stateListAnimator="@null"
+            android:layout_marginTop="12dp" />
     </LinearLayout>
+
+    <!-- Spacer to push navigation bar to bottom -->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+    <!-- Bottom navigation bar -->
     <LinearLayout
         android:id="@+id/navigationBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
         android:orientation="horizontal"
         android:background="@android:color/white"
         android:padding="12dp"
@@ -114,4 +129,4 @@
                 android:textSize="12sp" />
         </LinearLayout>
     </LinearLayout>
-</FrameLayout>
+</LinearLayout>
