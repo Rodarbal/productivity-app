@@ -39,7 +39,6 @@ class MainActivity : AppCompatActivity() {
         val resetButton = findViewById<Button>(R.id.resetButton)
         resetButton.setOnClickListener {
             // Always stop the timer and reset it
-            timerRingView.isRunning = false
             timerRingView.resetTimer()
 
             // Update the pause button to show play icon
@@ -48,12 +47,16 @@ class MainActivity : AppCompatActivity() {
 
         val levelButton = findViewById<ImageView?>(R.id.levelButton)
         levelButton?.setOnClickListener {
+            timerRingView.isRunning = false
             val intent = Intent(this, LevelsActivity::class.java)
             startActivity(intent)
             overridePendingTransition(0, 0)
             finish()
         }
 
+        timerRing.onTimerFinished = {
+            pauseButton.setImageResource(R.drawable.ic_play)
+        }
         // OPTIONAL: Stop it later
         // timerRing.isRunning = false
 

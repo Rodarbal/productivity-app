@@ -12,6 +12,8 @@ class TimerRingView @JvmOverloads constructor(
     defStyle: Int = 0
 ) : View(context, attrs, defStyle) {
 
+    var onTimerFinished: (() -> Unit)? = null
+
     var durationMillis: Long = 10000L // default 10 seconds
     var isRunning: Boolean = true
         set(value) {
@@ -70,6 +72,7 @@ class TimerRingView @JvmOverloads constructor(
                 TimerState.completions++
                 completedCount = TimerState.completions
                 invalidate()
+                onTimerFinished?.invoke()
             }
         }
     }
@@ -89,7 +92,7 @@ class TimerRingView @JvmOverloads constructor(
         post(updateRunnable)
     }
 
-    private fun stopTimer() {
+    fun stopTimer() {
         removeCallbacks(updateRunnable)
         TimerState.remainingTime = remainingTime
         TimerState.isRunning = isRunning
