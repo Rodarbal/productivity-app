@@ -13,6 +13,48 @@
         android:layout_gravity="center_horizontal" />
 
     <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:layout_marginTop="150dp"
+        >
+
+        <Button
+            android:id="@+id/selectLevel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Select Level"
+            android:drawableStart="@drawable/ic_control"
+            android:drawableTint="#0000FF"
+            android:drawablePadding="6dp"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:background="@drawable/button_reset_background"
+            android:textColor="#0000FF"
+            android:textAllCaps="false"
+            android:stateListAnimator="@null"
+            />
+
+        <Button
+            android:id="@+id/battle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Battle"
+            android:drawableStart="@drawable/ic_battle"
+            android:drawableTint="#FFFFFF"
+            android:drawablePadding="12dp"
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp"
+            android:background="@drawable/button_battle_background"
+            android:textColor="#FFFFFF"
+            android:textAllCaps="false"
+            android:stateListAnimator="@null" />
+    </LinearLayout>
+
+    <LinearLayout
         android:id="@+id/navigationBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
