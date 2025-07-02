@@ -141,6 +141,26 @@ class TimerRingView @JvmOverloads constructor(
         val minutes = secondsLeft / 60
         val seconds = secondsLeft % 60
         val timeText = String.format("%02d:%02d", minutes, seconds)
+
+        // Level Line
+        val levelPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
+            color = Color.DKGRAY
+            textSize = 48f
+            textAlign = Paint.Align.CENTER
+            typeface = Typeface.create(Typeface.DEFAULT, Typeface.NORMAL)
+        }
+        canvas.drawText("Level 1", centerX, centerY - 270f, levelPaint)
+
+        // Second line: "Beginner Mind"
+        val titlePaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
+            color = Color.DKGRAY
+            textSize = 64f
+            textAlign = Paint.Align.CENTER
+            typeface = Typeface.create(Typeface.DEFAULT, Typeface.BOLD)
+        }
+        canvas.drawText("Beginner Mind", centerX, centerY - 200f, titlePaint)
+
+        // Third line: timer text (already in place)
         canvas.drawText(timeText, centerX, centerY, textPaint)
 
         drawProgressCircles(canvas, centerX, centerY, completedCount)
