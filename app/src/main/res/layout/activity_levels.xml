@@ -5,6 +5,13 @@
     android:layout_height="match_parent"
     android:gravity="center">
 
+    <com.example.productivityapp.TimerRingView
+        android:id="@+id/timerRing"
+        android:layout_width="325dp"
+        android:layout_height="350dp"
+        android:layout_marginTop="200dp"
+        android:layout_gravity="center_horizontal" />
+
     <LinearLayout
         android:id="@+id/navigationBar"
         android:layout_width="match_parent"

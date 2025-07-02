@@ -16,12 +16,22 @@ class TimerRingView @JvmOverloads constructor(
     var isRunning: Boolean = true
         set(value) {
             field = value
-            if (value) {
-                startTimer()
+            if (syncFromState) {
+                if (value) {
+                    startTimer()
+                } else {
+                    stopTimer()
+                }
             } else {
-                stopTimer()
+                // If not syncing, just stop updates but do not touch shared state
+                if (value) {
+                    removeCallbacks(updateRunnable)
+                }
             }
         }
+    var completedCount : Int = TimerState.completions
+
+    var syncFromState: Boolean = true
 
     private var remainingTime: Long = durationMillis
     private var startTime: Long = 0L
@@ -58,9 +68,15 @@ class TimerRingView @JvmOverloads constructor(
                 postDelayed(this, updateInterval)
             } else if (remainingTime <= 0 && TimerState.completions < 5) {
                 TimerState.completions++
+                completedCount = TimerState.completions
                 invalidate()
             }
         }
+    }
+
+    fun showFullRing() {
+        angle = 360f
+        invalidate()
     }
 
     private fun startTimer() {
@@ -99,7 +115,9 @@ class TimerRingView @JvmOverloads constructor(
 
     override fun onAttachedToWindow() {
         super.onAttachedToWindow()
-        initFromState()
+        if (syncFromState) {
+            initFromState()
+        }
     }
 
     override fun onDraw(canvas: Canvas) {
@@ -122,10 +140,10 @@ class TimerRingView @JvmOverloads constructor(
         val timeText = String.format("%02d:%02d", minutes, seconds)
         canvas.drawText(timeText, centerX, centerY, textPaint)
 
-        drawProgressCircles(canvas, centerX, centerY)
+        drawProgressCircles(canvas, centerX, centerY, completedCount)
     }
 
-    private fun drawProgressCircles(canvas: Canvas, centerX: Float, centerY: Float) {
+    private fun drawProgressCircles(canvas: Canvas, centerX: Float, centerY: Float, completes : Int ) {
         val circleRadius = 18f
         val spacing = 24f
         val totalWidth = (circleRadius * 2 * 5) + (spacing * 4)
@@ -156,7 +174,7 @@ class TimerRingView @JvmOverloads constructor(
         }
 
         // Fill in first 5 (temporary placeholder)
-        for (i in 0 until TimerState.completions) {
+        for (i in 0 until completes) {
             val cx = startX + i * (circleRadius * 2 + spacing)
             canvas.drawCircle(cx, circleY, circleRadius, fillPaint)
         }

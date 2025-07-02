@@ -20,11 +20,8 @@ class MainActivity : AppCompatActivity() {
         // Get reference to the view
         timerRing = findViewById(R.id.timerRing)
 
-        // Set how long the timer should run (e.g. 10 seconds = 10,000 milliseconds)
-        timerRing.durationMillis = 10000L // 10 seconds
-
-        // Start the timer
-        timerRing.isRunning = true
+        // Sync timerRing from shared state instead of overriding duration/isRunning
+        timerRing.syncFromState = true
 
         val pauseButton = findViewById<ImageButton>(R.id.pauseButton)
         val initialIcon = if (TimerState.isRunning) R.drawable.ic_pause else R.drawable.ic_play
@@ -38,6 +35,7 @@ class MainActivity : AppCompatActivity() {
 
 
         val timerRingView = findViewById<TimerRingView>(R.id.timerRing)
+        timerRing.syncFromState = true // <- default anyway
         val resetButton = findViewById<Button>(R.id.resetButton)
         resetButton.setOnClickListener {
             // Always stop the timer and reset it
