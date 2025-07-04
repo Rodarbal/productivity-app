@@ -4,7 +4,10 @@ import android.content.Context
 import android.graphics.*
 import android.util.AttributeSet
 import android.view.View
+import androidx.core.app.NotificationCompat
 import kotlin.math.min
+import android.os.Build
+import android.app.NotificationManager
 
 class TimerRingView @JvmOverloads constructor(
     context: Context,
@@ -59,6 +62,17 @@ class TimerRingView @JvmOverloads constructor(
         typeface = Typeface.create(Typeface.DEFAULT, 500, false) // 500 = Medium weight
     }
 
+    private fun sendCompletionNotification() {
+        val notificationManager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+        val builder = NotificationCompat.Builder(context, "timer_channel")
+            .setSmallIcon(R.drawable.ic_timer)
+            .setContentTitle("Deep work session is completed!")
+            .setContentText("Great job! Take a break or start another session.")
+            .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+
+        notificationManager.notify(1001, builder.build())
+    }
+
     private val updateInterval: Long = 16L // ~60fps
     private val updateRunnable = object : Runnable {
         override fun run() {
@@ -70,6 +84,7 @@ class TimerRingView @JvmOverloads constructor(
                 postDelayed(this, updateInterval)
             } else if (remainingTime <= 0 && TimerState.completions < 5) {
                 TimerState.completions++
+                sendCompletionNotification()
                 completedCount = TimerState.completions
                 invalidate()
                 onTimerFinished?.invoke()
