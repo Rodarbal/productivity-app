@@ -17,7 +17,7 @@ class TimerRingView @JvmOverloads constructor(
 
     var onTimerFinished: (() -> Unit)? = null
 
-    var durationMillis: Long = 10000L // default 10 seconds
+    var durationMillis: Long = 0L // default 10 seconds
     var isRunning: Boolean = true
         set(value) {
             field = value

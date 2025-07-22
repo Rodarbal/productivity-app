@@ -33,9 +33,8 @@ class LevelsActivity : AppCompatActivity() {
 
         override fun onBindViewHolder(holder: LevelViewHolder, position: Int) {
             val timerRing = holder.itemView.findViewById<TimerRingView>(R.id.timerRing)
-            val timerButton = holder.itemView.findViewById<ImageView>(R.id.timerButton)
-
-            timerButton?.setOnClickListener {
+            val levelButton = holder.itemView.findViewById<View>(R.id.levelButton)
+            levelButton?.setOnClickListener {
                 val intent = Intent(this@LevelsActivity, MainActivity::class.java)
                 startActivity(intent)
                 overridePendingTransition(0, 0)
