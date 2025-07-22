@@ -8,6 +8,7 @@ import androidx.core.app.NotificationCompat
 import kotlin.math.min
 import android.os.Build
 import android.app.NotificationManager
+import androidx.annotation.RequiresApi
 
 class TimerRingView @JvmOverloads constructor(
     context: Context,
@@ -55,6 +56,7 @@ class TimerRingView @JvmOverloads constructor(
         strokeCap = Paint.Cap.ROUND
     }
 
+    @RequiresApi(Build.VERSION_CODES.P)
     private val textPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
         color = Color.BLACK
         textSize = 200f
