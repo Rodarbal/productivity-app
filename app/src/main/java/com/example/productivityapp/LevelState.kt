@@ -8,13 +8,46 @@ object LevelState {
         val colour: Int,
         val timeMillis: Long,
         val location: Int,
+        val uiColor: Int,
+        val name: String,
+        val level: String,
         var selected: Boolean
     )
 
+//    val levels = mutableListOf(
+//        Level(colour = "#ccccff".toColorInt(), timeMillis = 10000L, location = 0, uiColor="#0000ff".toColorInt(), name="Beginner Mind", level="1", selected = true),
+//        Level(colour = android.graphics.Color.RED, timeMillis = 15000L, location = 1, selected = false),
+//        Level(colour = android.graphics.Color.GREEN, timeMillis = 20000L, location = 2, selected = false)
+//    )
+
     val levels = mutableListOf(
-        Level(colour = "#ccccff".toColorInt(), timeMillis = 10000L, location = 0, selected = true),
-        Level(colour = android.graphics.Color.RED, timeMillis = 15000L, location = 1, selected = false),
-        Level(colour = android.graphics.Color.GREEN, timeMillis = 20000L, location = 2, selected = false)
+        Level(
+            colour = "#ccccff".toColorInt(),
+            timeMillis = 10000L,
+            location = 0,
+            uiColor = "#0000ff".toColorInt(),
+            name = "Monkey Mind",
+            level = "Level 1",
+            selected = true
+        ),
+        Level(
+            colour = "#ffe5e5".toColorInt(),
+            timeMillis = 15000L,
+            location = 1,
+            uiColor = "#ff4d4d".toColorInt(),
+            name = "Noob",
+            level = "Level 2",
+            selected = false
+        ),
+        Level(
+            colour = "#e6ffe6".toColorInt(),
+            timeMillis = 20000L,
+            location = 2,
+            uiColor = "#00cc44".toColorInt(),
+            name = "Average",
+            level = "Level 3",
+            selected = false
+        )
     )
 
     fun getSelectedLevel(): Level? = levels.find { it.selected }

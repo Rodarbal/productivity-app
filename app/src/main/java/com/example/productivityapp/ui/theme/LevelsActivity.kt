@@ -1,4 +1,6 @@
 package com.example.productivityapp.ui.theme
+import android.widget.TextView
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.widget.ImageView
@@ -22,6 +24,9 @@ class LevelsActivity : AppCompatActivity() {
         val viewPager = findViewById<ViewPager2>(R.id.viewPager)
         viewPager.orientation = ViewPager2.ORIENTATION_VERTICAL
         viewPager.adapter = LevelPagerAdapter(this)
+        val sortedLevels = LevelState.levels.sortedByDescending { it.location }
+        val selectedIndex = sortedLevels.indexOfFirst { it.selected }
+        viewPager.setCurrentItem(selectedIndex, false)
 
         // Set the timerButton click listener here (outside adapter)
         val timerButton = findViewById<View>(R.id.timerButton)
@@ -41,12 +46,18 @@ class LevelsActivity : AppCompatActivity() {
 
         override fun getItemCount(): Int = LevelState.levels.size
 
+        @SuppressLint("NotifyDataSetChanged")
         override fun onBindViewHolder(holder: LevelViewHolder, position: Int) {
-            val level = LevelState.levels[position]
+            val level = LevelState.levels.sortedByDescending { it.location }[position]
             val timerRing = holder.itemView.findViewById<TimerRingView>(R.id.timerRing)
             // val levelButton = holder.itemView.findViewById<View>(R.id.timerButton)
             // The timerButton click listener is now handled in onCreate()
 
+            val selectButton = holder.itemView.findViewById<View>(R.id.selectLevel)
+            selectButton?.setOnClickListener {
+                LevelState.selectLevel(level.location)
+                notifyDataSetChanged()
+            }
 
             // dummy timer
             timerRing.syncFromState = false
@@ -57,6 +68,11 @@ class LevelsActivity : AppCompatActivity() {
 
             // Set background color based solely on the colour property
             holder.itemView.setBackgroundColor(level.colour)
+
+            timerRing.ringColor = level.uiColor
+            timerRing.levelLabel = level.level
+            timerRing.levelName = level.name
+
         }
 
         inner class LevelViewHolder(view: View) : RecyclerView.ViewHolder(view)

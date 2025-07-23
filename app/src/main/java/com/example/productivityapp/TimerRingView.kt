@@ -16,6 +16,11 @@ class TimerRingView @JvmOverloads constructor(
     defStyle: Int = 0
 ) : View(context, attrs, defStyle) {
 
+    /** Label for the level, e.g., "Level 1". Can be set dynamically. */
+    var levelLabel: String = "Level 1"
+    /** Name for the level, e.g., "Beginner Mind". Can be set dynamically. */
+    var levelName: String = "Beginner Mind"
+
     var onTimerFinished: (() -> Unit)? = null
 
     var durationMillis: Long = 0L // default 10 seconds
@@ -55,6 +60,13 @@ class TimerRingView @JvmOverloads constructor(
         strokeWidth = 30f
         strokeCap = Paint.Cap.ROUND
     }
+
+    var ringColor: Int
+        get() = progressPaint.color
+        set(value) {
+            progressPaint.color = value
+            invalidate()
+        }
 
     @RequiresApi(Build.VERSION_CODES.P)
     private val textPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
@@ -166,16 +178,16 @@ class TimerRingView @JvmOverloads constructor(
             textAlign = Paint.Align.CENTER
             typeface = Typeface.create(Typeface.DEFAULT, Typeface.NORMAL)
         }
-        canvas.drawText("Level 1", centerX, centerY - 230f, levelPaint)
+        canvas.drawText(levelLabel, centerX, centerY - 230f, levelPaint)
 
-        // Second line: "Beginner Mind"
+        // Second line: level name
         val titlePaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
             color = Color.DKGRAY
             textSize = 64f
             textAlign = Paint.Align.CENTER
             typeface = Typeface.create(Typeface.DEFAULT, Typeface.BOLD)
         }
-        canvas.drawText("Beginner Mind", centerX, centerY - 160f, titlePaint)
+        canvas.drawText(levelName, centerX, centerY - 160f, titlePaint)
 
         // Third line: timer text (already in place)
         canvas.drawText(timeText, centerX, centerY + 20f, textPaint)
