@@ -74,6 +74,11 @@ class LevelsActivity : AppCompatActivity() {
             timerRing.levelLabel = level.level
             timerRing.levelName = level.name
 
+            val totalSeconds = level.timeMillis / 1000
+            val minutes = totalSeconds / 60
+            val seconds = totalSeconds % 60
+            timerRing.customTimeText = String.format("%02d:%02d", minutes, seconds)
+
         }
 
         inner class LevelViewHolder(view: View) : RecyclerView.ViewHolder(view)

@@ -41,6 +41,15 @@ object LevelState {
             name = "Average",
             level = "Level 3",
             selected = false
+        ),
+        Level(
+            colour = "#ffffff".toColorInt(),
+            timeMillis = 10000L,
+            location = 3,
+            uiColor = "#000000".toColorInt(),
+            name = "Developer",
+            level = "Level Dev",
+            selected = false
         )
     )
 

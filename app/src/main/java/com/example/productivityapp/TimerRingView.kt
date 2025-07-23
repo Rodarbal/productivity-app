@@ -44,6 +44,12 @@ class TimerRingView @JvmOverloads constructor(
 
     var syncFromState: Boolean = true
 
+    var customTimeText: String? = null
+        set(value) {
+            field = value
+            invalidate()
+        }
+
     private var remainingTime: Long = durationMillis
     private var startTime: Long = 0L
     private var angle: Float = 0f
@@ -169,7 +175,7 @@ class TimerRingView @JvmOverloads constructor(
         val secondsLeft = (remainingTime / 1000).toInt()
         val minutes = secondsLeft / 60
         val seconds = secondsLeft % 60
-        val timeText = String.format("%02d:%02d", minutes, seconds)
+        val timeText = customTimeText ?: String.format("%02d:%02d", minutes, seconds)
 
         // Level Line
         val levelPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
