@@ -65,7 +65,6 @@ class LevelsActivity : AppCompatActivity() {
             timerRing.durationMillis = level.timeMillis
             timerRing.isRunning = false
             timerRing.showFullRing()
-            timerRing.completedCount = TimerState.currentTimer.completions
 
             // Set background color based solely on the colour property
             holder.itemView.setBackgroundColor(level.colour)
@@ -73,6 +72,7 @@ class LevelsActivity : AppCompatActivity() {
             timerRing.ringColor = level.uiColor
             timerRing.levelLabel = level.level
             timerRing.levelName = level.name
+            timerRing.completedCount = level.completions
 
             val totalSeconds = level.timeMillis / 1000
             val minutes = totalSeconds / 60

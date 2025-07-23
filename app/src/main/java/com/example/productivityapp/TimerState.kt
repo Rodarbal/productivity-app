@@ -5,7 +5,7 @@ data class TimerData(
     var remainingTime: Long = 60000L,
     var isRunning: Boolean = false,
     var lastStartTime: Long = 0L,
-    var completions: Int = 0
+    //var completions: Int = 0
 )
 
 object TimerState {
@@ -16,6 +16,6 @@ object TimerState {
         currentTimer.remainingTime = level.timeMillis
         currentTimer.isRunning = false
         currentTimer.lastStartTime = 0L
-        currentTimer.completions = 0
+        //currentTimer.completions = 0
     }
 }

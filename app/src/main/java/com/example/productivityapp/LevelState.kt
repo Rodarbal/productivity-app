@@ -11,6 +11,7 @@ object LevelState {
         val uiColor: Int,
         val name: String,
         val level: String,
+        var completions: Int,
         var selected: Boolean
     )
 
@@ -22,6 +23,7 @@ object LevelState {
             uiColor = "#0000ff".toColorInt(),
             name = "Monkey Mind",
             level = "Level 1",
+            completions = 0,
             selected = true
         ),
         Level(
@@ -31,6 +33,7 @@ object LevelState {
             uiColor = "#ff4d4d".toColorInt(),
             name = "Noob",
             level = "Level 2",
+            completions = 0,
             selected = false
         ),
         Level(
@@ -40,6 +43,7 @@ object LevelState {
             uiColor = "#00cc44".toColorInt(),
             name = "Average",
             level = "Level 3",
+            completions = 0,
             selected = false
         ),
         Level(
@@ -49,6 +53,7 @@ object LevelState {
             uiColor = "#000000".toColorInt(),
             name = "Developer",
             level = "Level Dev",
+            completions = 0,
             selected = false
         )
     )

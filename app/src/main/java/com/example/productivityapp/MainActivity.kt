@@ -36,6 +36,7 @@ class MainActivity : AppCompatActivity() {
             timerRing.ringColor = level.uiColor
             timerRing.levelLabel = level.level
             timerRing.levelName = level.name
+            // timerRing.completedCount will be updated periodically below
         }
 
         val pauseButton = findViewById<ImageButton>(R.id.pauseButton)
@@ -51,6 +52,7 @@ class MainActivity : AppCompatActivity() {
 
         val timerRingView = findViewById<TimerRingView>(R.id.timerRing)
         timerRing.syncFromState = true // <- default anyway
+
         val resetButton = findViewById<Button>(R.id.resetButton)
         resetButton.setOnClickListener {
             // Always stop the timer and reset it
@@ -79,6 +81,16 @@ class MainActivity : AppCompatActivity() {
 
         // OPTIONAL: Reset the timer
         // timerRing.resetTimer()
+
+        // Periodically update timerRing.completedCount to stay in sync with level completions
+        val handler = android.os.Handler()
+        val updateCompletions = object : Runnable {
+            override fun run() {
+                timerRing.completedCount = LevelState.getSelectedLevel()?.completions ?: 0
+                handler.postDelayed(this, 1000)
+            }
+        }
+        handler.post(updateCompletions)
     }
 }
 

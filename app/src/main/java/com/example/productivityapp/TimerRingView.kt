@@ -40,8 +40,11 @@ class TimerRingView @JvmOverloads constructor(
                 }
             }
         }
-    var completedCount: Int = TimerState.currentTimer.completions
-
+    var completedCount: Int = 0
+        set(value) {
+            field = value
+            invalidate() // triggers re-draw
+        }
     var syncFromState: Boolean = true
 
     var customTimeText: String? = null
@@ -102,12 +105,15 @@ class TimerRingView @JvmOverloads constructor(
             invalidate()
             if (remainingTime > 0 && isRunning) {
                 postDelayed(this, updateInterval)
-            } else if (remainingTime <= 0 && TimerState.currentTimer.completions < 5) {
-                TimerState.currentTimer.completions++
-                sendCompletionNotification()
-                completedCount = TimerState.currentTimer.completions
-                invalidate()
-                onTimerFinished?.invoke()
+            } else if (remainingTime <= 0) {
+                LevelState.getSelectedLevel()?.let { level ->
+                    if (level.completions < 5) {
+                        level.completions++
+                        sendCompletionNotification()
+                        invalidate()
+                        onTimerFinished?.invoke()
+                    }
+                }
             }
         }
     }
@@ -158,6 +164,7 @@ class TimerRingView @JvmOverloads constructor(
         }
     }
 
+    @RequiresApi(Build.VERSION_CODES.P)
     override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
         val padding = 40f
