@@ -14,16 +14,10 @@ object LevelState {
         var selected: Boolean
     )
 
-//    val levels = mutableListOf(
-//        Level(colour = "#ccccff".toColorInt(), timeMillis = 10000L, location = 0, uiColor="#0000ff".toColorInt(), name="Beginner Mind", level="1", selected = true),
-//        Level(colour = android.graphics.Color.RED, timeMillis = 15000L, location = 1, selected = false),
-//        Level(colour = android.graphics.Color.GREEN, timeMillis = 20000L, location = 2, selected = false)
-//    )
-
     val levels = mutableListOf(
         Level(
             colour = "#ccccff".toColorInt(),
-            timeMillis = 10000L,
+            timeMillis = 60000L,
             location = 0,
             uiColor = "#0000ff".toColorInt(),
             name = "Monkey Mind",
@@ -32,7 +26,7 @@ object LevelState {
         ),
         Level(
             colour = "#ffe5e5".toColorInt(),
-            timeMillis = 15000L,
+            timeMillis = 600000L,
             location = 1,
             uiColor = "#ff4d4d".toColorInt(),
             name = "Noob",
@@ -41,7 +35,7 @@ object LevelState {
         ),
         Level(
             colour = "#e6ffe6".toColorInt(),
-            timeMillis = 20000L,
+            timeMillis = 1800000L,
             location = 2,
             uiColor = "#00cc44".toColorInt(),
             name = "Average",

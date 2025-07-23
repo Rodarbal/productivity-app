@@ -56,6 +56,7 @@ class LevelsActivity : AppCompatActivity() {
             val selectButton = holder.itemView.findViewById<View>(R.id.selectLevel)
             selectButton?.setOnClickListener {
                 LevelState.selectLevel(level.location)
+                TimerState.initializeFromSelectedLevel(level)
                 notifyDataSetChanged()
             }
 
@@ -64,7 +65,7 @@ class LevelsActivity : AppCompatActivity() {
             timerRing.durationMillis = level.timeMillis
             timerRing.isRunning = false
             timerRing.showFullRing()
-            timerRing.completedCount = TimerState.completions
+            timerRing.completedCount = TimerState.currentTimer.completions
 
             // Set background color based solely on the colour property
             holder.itemView.setBackgroundColor(level.colour)

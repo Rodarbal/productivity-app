@@ -40,7 +40,7 @@ class TimerRingView @JvmOverloads constructor(
                 }
             }
         }
-    var completedCount : Int = TimerState.completions
+    var completedCount: Int = TimerState.currentTimer.completions
 
     var syncFromState: Boolean = true
 
@@ -96,10 +96,10 @@ class TimerRingView @JvmOverloads constructor(
             invalidate()
             if (remainingTime > 0 && isRunning) {
                 postDelayed(this, updateInterval)
-            } else if (remainingTime <= 0 && TimerState.completions < 5) {
-                TimerState.completions++
+            } else if (remainingTime <= 0 && TimerState.currentTimer.completions < 5) {
+                TimerState.currentTimer.completions++
                 sendCompletionNotification()
-                completedCount = TimerState.completions
+                completedCount = TimerState.currentTimer.completions
                 invalidate()
                 onTimerFinished?.invoke()
             }
@@ -123,20 +123,20 @@ class TimerRingView @JvmOverloads constructor(
 
     fun stopTimer() {
         removeCallbacks(updateRunnable)
-        TimerState.remainingTime = remainingTime
-        TimerState.isRunning = isRunning
-        TimerState.lastStartTime = startTime
+        TimerState.currentTimer.remainingTime = remainingTime
+        TimerState.currentTimer.isRunning = isRunning
+        TimerState.currentTimer.lastStartTime = startTime
     }
     fun initFromState() {
-        durationMillis = TimerState.durationMillis
-        remainingTime = TimerState.remainingTime
+        durationMillis = TimerState.currentTimer.durationMillis
+        remainingTime = TimerState.currentTimer.remainingTime
 
-        if (TimerState.isRunning) {
-            val elapsed = System.currentTimeMillis() - TimerState.lastStartTime
-            remainingTime = (TimerState.remainingTime - elapsed).coerceAtLeast(0)
+        if (TimerState.currentTimer.isRunning) {
+            val elapsed = System.currentTimeMillis() - TimerState.currentTimer.lastStartTime
+            remainingTime = (TimerState.currentTimer.remainingTime - elapsed).coerceAtLeast(0)
         }
 
-        isRunning = TimerState.isRunning
+        isRunning = TimerState.currentTimer.isRunning
         angle = 360f * remainingTime.toFloat() / durationMillis
         invalidate()
 
@@ -236,9 +236,9 @@ class TimerRingView @JvmOverloads constructor(
         stopTimer()
         remainingTime = durationMillis
         angle = 360f
-        TimerState.remainingTime = remainingTime
-        TimerState.isRunning = false
-        TimerState.lastStartTime = 0L
+        TimerState.currentTimer.remainingTime = remainingTime
+        TimerState.currentTimer.isRunning = false
+        TimerState.currentTimer.lastStartTime = 0L
         invalidate()
     }
 }

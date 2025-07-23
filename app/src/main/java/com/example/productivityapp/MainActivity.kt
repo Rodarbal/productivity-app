@@ -31,9 +31,15 @@ class MainActivity : AppCompatActivity() {
 
         // Sync timerRing from shared state instead of overriding duration/isRunning
         timerRing.syncFromState = true
+        // Update timerRing visual attributes to reflect selected level
+        LevelState.getSelectedLevel()?.let { level ->
+            timerRing.ringColor = level.uiColor
+            timerRing.levelLabel = level.level
+            timerRing.levelName = level.name
+        }
 
         val pauseButton = findViewById<ImageButton>(R.id.pauseButton)
-        val initialIcon = if (TimerState.isRunning) R.drawable.ic_pause else R.drawable.ic_play
+        val initialIcon = if (TimerState.currentTimer.isRunning) R.drawable.ic_pause else R.drawable.ic_play
         pauseButton.setImageResource(initialIcon)
         pauseButton.setOnClickListener {
             timerRing.isRunning = !timerRing.isRunning
